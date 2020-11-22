@@ -5,7 +5,6 @@ import android.media.AudioManager;
 import android.media.MediaDataSource;
 import android.media.SoundPool;
 import android.os.Build;
-import android.os.PowerManager;
 import android.content.Context;
 import android.util.Log;
 
@@ -65,6 +64,7 @@ public class WrappedSoundPool extends Player {
     private final AudioplayersPlugin ref;
 
     private final String playerId;
+    private  int sessionId;
 
     private String url;
 
@@ -91,9 +91,16 @@ public class WrappedSoundPool extends Player {
         this.playerId = playerId;
     }
 
+
+
     @Override
     String getPlayerId() {
         return playerId;
+    }
+
+    @Override
+    int getSessionId() {
+        return sessionId;
     }
 
     @Override
