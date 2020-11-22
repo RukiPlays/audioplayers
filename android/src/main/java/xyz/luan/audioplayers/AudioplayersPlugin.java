@@ -84,6 +84,7 @@ public class AudioplayersPlugin implements MethodCallHandler, FlutterPlugin {
                     player.seek(position);
                 }
                 player.play(context.getApplicationContext());
+                channel.invokeMethod("setSessionId",sessionId);
                 break;
             }
             case "playBytes": {
