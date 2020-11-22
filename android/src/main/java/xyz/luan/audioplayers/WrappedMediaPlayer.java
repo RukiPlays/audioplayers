@@ -63,6 +63,8 @@ public class WrappedMediaPlayer extends Player implements MediaPlayer.OnPrepared
             this.player.setVolume((float) volume, (float) volume);
             this.player.setLooping(this.releaseMode == ReleaseMode.LOOP);
             this.player.prepareAsync();
+            this.sessionId=this.player.getAudioSessionId();
+            System.out.println("Session id: "+this.sessionId);
         }
 
         // Dispose of any old data buffer array, if we are now playing from another source.
@@ -86,6 +88,7 @@ public class WrappedMediaPlayer extends Player implements MediaPlayer.OnPrepared
             this.player.setLooping(this.releaseMode == ReleaseMode.LOOP);
             this.player.prepareAsync();
             this.sessionId=this.player.getAudioSessionId();
+            System.out.println("Session id: "+this.sessionId);
         }
     }
 
