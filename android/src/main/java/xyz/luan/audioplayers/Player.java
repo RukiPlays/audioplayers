@@ -10,6 +10,8 @@ abstract class Player {
     }
 
     abstract String getPlayerId();
+    
+    abstract int getSessionId();
 
     abstract void play(Context context);
 
