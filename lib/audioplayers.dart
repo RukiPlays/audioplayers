@@ -299,6 +299,9 @@ class AudioPlayer {
   ///
   /// This is used to properly exchange messages with the [MethodChannel].
   String playerId;
+  
+  /// A session ID is required for th android studios visualizer to work
+  int sessionId;
 
   /// Current mode of the audio player. Can be updated at any time, but is going
   /// to take effect only at the next time you play the audio.
@@ -375,6 +378,10 @@ class AudioPlayer {
 
     return true;
   }
+  
+  retrieveSessionId(MethodCall call)async{
+  sessionId= await call.arguments('sessionId')
+  }
 
   /// Plays an audio.
   ///
@@ -382,6 +389,7 @@ class AudioPlayer {
   /// If [isLocal] is false, [url] must be a remote URL.
   ///
   /// respectSilence and stayAwake are not implemented on macOS.
+  
   Future<int> play(
     String url, {
     bool isLocal,
@@ -673,6 +681,9 @@ class AudioPlayer {
         break;
       case 'audio.onGotPreviousTrackCommand':
         player._commandController.add(PlayerControlCommand.PREVIOUS_TRACK);
+        break;
+      case 'getSessionId':
+        player.retrieveSessionId(call);
         break;
       default:
         _log('Unknown method ${call.method} ');
