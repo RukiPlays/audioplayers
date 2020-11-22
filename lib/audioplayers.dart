@@ -380,7 +380,7 @@ class AudioPlayer {
   }
   
   retrieveSessionId(MethodCall call)async{
-  sessionId= await call.arguments('sessionId')
+  sessionId= await call.arguments('sessionId');
   }
 
   /// Plays an audio.
@@ -682,7 +682,7 @@ class AudioPlayer {
       case 'audio.onGotPreviousTrackCommand':
         player._commandController.add(PlayerControlCommand.PREVIOUS_TRACK);
         break;
-      case 'getSessionId':
+      case 'setSessionId':
         player.retrieveSessionId(call);
         break;
       default:
