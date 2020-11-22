@@ -14,6 +14,7 @@ import java.io.IOException;
 public class WrappedMediaPlayer extends Player implements MediaPlayer.OnPreparedListener, MediaPlayer.OnCompletionListener, AudioManager.OnAudioFocusChangeListener, MediaPlayer.OnSeekCompleteListener, MediaPlayer.OnErrorListener {
 
     private String playerId;
+    private int sessionId;
     private MediaPlayer player;
 
     private String url;
@@ -84,6 +85,7 @@ public class WrappedMediaPlayer extends Player implements MediaPlayer.OnPrepared
             this.player.setVolume((float) volume, (float) volume);
             this.player.setLooping(this.releaseMode == ReleaseMode.LOOP);
             this.player.prepareAsync();
+            this.sessionId=this.player.getAudioSessionId();
         }
     }
 
@@ -200,6 +202,19 @@ public class WrappedMediaPlayer extends Player implements MediaPlayer.OnPrepared
     String getPlayerId() {
         return this.playerId;
     }
+
+
+
+    /// modified //
+
+
+    @Override
+    int getSessionId() {
+        return this.sessionId;
+    }
+/// /// // /
+
+
 
     @Override
     boolean isActuallyPlaying() {
