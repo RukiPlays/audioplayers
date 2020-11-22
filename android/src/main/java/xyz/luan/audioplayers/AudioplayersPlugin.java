@@ -27,7 +27,7 @@ public class AudioplayersPlugin implements MethodCallHandler, FlutterPlugin {
     private Runnable positionUpdates;
     private Context context;
     private boolean seekFinish;
-
+     private  int sessionId;
     public static void registerWith(final Registrar registrar) {
         final MethodChannel channel = new MethodChannel(registrar.messenger(), "xyz.luan/audioplayers");
         channel.setMethodCallHandler(new AudioplayersPlugin(channel, registrar.activeContext()));
@@ -105,6 +105,7 @@ public class AudioplayersPlugin implements MethodCallHandler, FlutterPlugin {
                     player.seek(position);
                 }
                 player.play(context.getApplicationContext());
+                 channel.invokeMethod("setSessionId",sessionId);
                 break;
             }
             case "resume": {
